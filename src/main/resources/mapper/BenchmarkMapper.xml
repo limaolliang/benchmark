@@ -1,0 +1,901 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.benchmark.mapper.BenchmarkMapper" >
+  <resultMap id="BaseResultMap" type="com.tencent.benchmark.model.Benchmark" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="car_name" property="carName" jdbcType="VARCHAR" />
+    <result column="device_name" property="deviceName" jdbcType="VARCHAR" />
+    <result column="antutu_total_score_openGL2" property="antutuTotalScoreOpengl2" jdbcType="INTEGER" />
+    <result column="antutu_total_score_openGL3" property="antutuTotalScoreOpengl3" jdbcType="INTEGER" />
+    <result column="android_version" property="androidVersion" jdbcType="VARCHAR" />
+    <result column="cpu_micro_rchitecture" property="cpuMicroRchitecture" jdbcType="VARCHAR" />
+    <result column="cpu_type" property="cpuType" jdbcType="VARCHAR" />
+    <result column="dmips_actual" property="dmipsActual" jdbcType="INTEGER" />
+    <result column="dmips_pridict" property="dmipsPridict" jdbcType="INTEGER" />
+    <result column="cpu_frequency" property="cpuFrequency" jdbcType="INTEGER" />
+    <result column="ddr_frequency" property="ddrFrequency" jdbcType="INTEGER" />
+    <result column="memory_size" property="memorySize" jdbcType="INTEGER" />
+    <result column="gpu_type" property="gpuType" jdbcType="VARCHAR" />
+    <result column="gpu_version" property="gpuVersion" jdbcType="VARCHAR" />
+    <result column="antutu_cpu_singlecore_score" property="antutuCpuSinglecoreScore" jdbcType="INTEGER" />
+    <result column="antutu_cpu_singlecore_normalcal_score" property="antutuCpuSinglecoreNormalcalScore" jdbcType="INTEGER" />
+    <result column="antutu_cpu_multicore_score" property="antutuCpuMulticoreScore" jdbcType="INTEGER" />
+    <result column="antutu_ram_score" property="antutuRamScore" jdbcType="INTEGER" />
+    <result column="antutu_rom_score" property="antutuRomScore" jdbcType="INTEGER" />
+    <result column="antutu_data_process_score" property="antutuDataProcessScore" jdbcType="INTEGER" />
+    <result column="antutu_img_process_score" property="antutuImgProcessScore" jdbcType="INTEGER" />
+    <result column="antutu_data_security_score" property="antutuDataSecurityScore" jdbcType="INTEGER" />
+    <result column="antutu_h5_score" property="antutuH5Score" jdbcType="INTEGER" />
+    <result column="sdbench_ram_copy_speed" property="sdbenchRamCopySpeed" jdbcType="DOUBLE" />
+    <result column="sdbench_sdcard_read_speed" property="sdbenchSdcardReadSpeed" jdbcType="DOUBLE" />
+    <result column="sdbench_sdcard_write_speed" property="sdbenchSdcardWriteSpeed" jdbcType="DOUBLE" />
+    <result column="sdbench_rom_read_speed" property="sdbenchRomReadSpeed" jdbcType="DOUBLE" />
+    <result column="sdbench_rom_write_speed" property="sdbenchRomWriteSpeed" jdbcType="DOUBLE" />
+    <result column="androbench_seq_read_speed" property="androbenchSeqReadSpeed" jdbcType="DOUBLE" />
+    <result column="androbench_seq_write_speed" property="androbenchSeqWriteSpeed" jdbcType="DOUBLE" />
+    <result column="androbench_random_read_speed" property="androbenchRandomReadSpeed" jdbcType="DOUBLE" />
+    <result column="androbench_random_write_speed" property="androbenchRandomWriteSpeed" jdbcType="DOUBLE" />
+    <result column="androbench_sql_insert" property="androbenchSqlInsert" jdbcType="DOUBLE" />
+    <result column="androbench_sql_update" property="androbenchSqlUpdate" jdbcType="DOUBLE" />
+    <result column="androbench_sql_delete" property="androbenchSqlDelete" jdbcType="DOUBLE" />
+    <result column="net_ping" property="netPing" jdbcType="DOUBLE" />
+    <result column="net_speed" property="netSpeed" jdbcType="DOUBLE" />
+    <result column="gps_number" property="gpsNumber" jdbcType="INTEGER" />
+    <result column="gps_intensity" property="gpsIntensity" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.tencent.benchmark.model.Benchmark" extends="BaseResultMap" >
+    <result column="bluetooth_basic_function" property="bluetoothBasicFunction" jdbcType="BINARY" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, car_name, device_name, antutu_total_score_openGL2, antutu_total_score_openGL3, 
+    android_version, cpu_micro_rchitecture, cpu_type, dmips_actual, dmips_pridict, cpu_frequency, 
+    ddr_frequency, memory_size, gpu_type, gpu_version, antutu_cpu_singlecore_score, antutu_cpu_singlecore_normalcal_score, 
+    antutu_cpu_multicore_score, antutu_ram_score, antutu_rom_score, antutu_data_process_score, 
+    antutu_img_process_score, antutu_data_security_score, antutu_h5_score, sdbench_ram_copy_speed, 
+    sdbench_sdcard_read_speed, sdbench_sdcard_write_speed, sdbench_rom_read_speed, sdbench_rom_write_speed, 
+    androbench_seq_read_speed, androbench_seq_write_speed, androbench_random_read_speed, 
+    androbench_random_write_speed, androbench_sql_insert, androbench_sql_update, androbench_sql_delete, 
+    net_ping, net_speed, gps_number, gps_intensity
+  </sql>
+  <sql id="Blob_Column_List" >
+    bluetooth_basic_function
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.tencent.benchmark.model.BenchmarkExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_device_benchmark
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tencent.benchmark.model.BenchmarkExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_device_benchmark
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_device_benchmark
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_device_benchmark
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tencent.benchmark.model.BenchmarkExample" >
+    delete from t_device_benchmark
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tencent.benchmark.model.Benchmark" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_device_benchmark (car_name, device_name, antutu_total_score_openGL2, 
+      antutu_total_score_openGL3, android_version, 
+      cpu_micro_rchitecture, cpu_type, dmips_actual, 
+      dmips_pridict, cpu_frequency, ddr_frequency, 
+      memory_size, gpu_type, gpu_version, 
+      antutu_cpu_singlecore_score, antutu_cpu_singlecore_normalcal_score, 
+      antutu_cpu_multicore_score, antutu_ram_score, 
+      antutu_rom_score, antutu_data_process_score, 
+      antutu_img_process_score, antutu_data_security_score, 
+      antutu_h5_score, sdbench_ram_copy_speed, sdbench_sdcard_read_speed, 
+      sdbench_sdcard_write_speed, sdbench_rom_read_speed, 
+      sdbench_rom_write_speed, androbench_seq_read_speed, 
+      androbench_seq_write_speed, androbench_random_read_speed, 
+      androbench_random_write_speed, androbench_sql_insert, 
+      androbench_sql_update, androbench_sql_delete, 
+      net_ping, net_speed, gps_number, 
+      gps_intensity, bluetooth_basic_function)
+    values (#{carName,jdbcType=VARCHAR}, #{deviceName,jdbcType=VARCHAR}, #{antutuTotalScoreOpengl2,jdbcType=INTEGER}, 
+      #{antutuTotalScoreOpengl3,jdbcType=INTEGER}, #{androidVersion,jdbcType=VARCHAR}, 
+      #{cpuMicroRchitecture,jdbcType=VARCHAR}, #{cpuType,jdbcType=VARCHAR}, #{dmipsActual,jdbcType=INTEGER}, 
+      #{dmipsPridict,jdbcType=INTEGER}, #{cpuFrequency,jdbcType=INTEGER}, #{ddrFrequency,jdbcType=INTEGER}, 
+      #{memorySize,jdbcType=INTEGER}, #{gpuType,jdbcType=VARCHAR}, #{gpuVersion,jdbcType=VARCHAR}, 
+      #{antutuCpuSinglecoreScore,jdbcType=INTEGER}, #{antutuCpuSinglecoreNormalcalScore,jdbcType=INTEGER}, 
+      #{antutuCpuMulticoreScore,jdbcType=INTEGER}, #{antutuRamScore,jdbcType=INTEGER}, 
+      #{antutuRomScore,jdbcType=INTEGER}, #{antutuDataProcessScore,jdbcType=INTEGER}, 
+      #{antutuImgProcessScore,jdbcType=INTEGER}, #{antutuDataSecurityScore,jdbcType=INTEGER}, 
+      #{antutuH5Score,jdbcType=INTEGER}, #{sdbenchRamCopySpeed,jdbcType=DOUBLE}, #{sdbenchSdcardReadSpeed,jdbcType=DOUBLE}, 
+      #{sdbenchSdcardWriteSpeed,jdbcType=DOUBLE}, #{sdbenchRomReadSpeed,jdbcType=DOUBLE}, 
+      #{sdbenchRomWriteSpeed,jdbcType=DOUBLE}, #{androbenchSeqReadSpeed,jdbcType=DOUBLE}, 
+      #{androbenchSeqWriteSpeed,jdbcType=DOUBLE}, #{androbenchRandomReadSpeed,jdbcType=DOUBLE}, 
+      #{androbenchRandomWriteSpeed,jdbcType=DOUBLE}, #{androbenchSqlInsert,jdbcType=DOUBLE}, 
+      #{androbenchSqlUpdate,jdbcType=DOUBLE}, #{androbenchSqlDelete,jdbcType=DOUBLE}, 
+      #{netPing,jdbcType=DOUBLE}, #{netSpeed,jdbcType=DOUBLE}, #{gpsNumber,jdbcType=INTEGER}, 
+      #{gpsIntensity,jdbcType=INTEGER}, #{bluetoothBasicFunction,jdbcType=BINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tencent.benchmark.model.Benchmark" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_device_benchmark
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="carName != null" >
+        car_name,
+      </if>
+      <if test="deviceName != null" >
+        device_name,
+      </if>
+      <if test="antutuTotalScoreOpengl2 != null" >
+        antutu_total_score_openGL2,
+      </if>
+      <if test="antutuTotalScoreOpengl3 != null" >
+        antutu_total_score_openGL3,
+      </if>
+      <if test="androidVersion != null" >
+        android_version,
+      </if>
+      <if test="cpuMicroRchitecture != null" >
+        cpu_micro_rchitecture,
+      </if>
+      <if test="cpuType != null" >
+        cpu_type,
+      </if>
+      <if test="dmipsActual != null" >
+        dmips_actual,
+      </if>
+      <if test="dmipsPridict != null" >
+        dmips_pridict,
+      </if>
+      <if test="cpuFrequency != null" >
+        cpu_frequency,
+      </if>
+      <if test="ddrFrequency != null" >
+        ddr_frequency,
+      </if>
+      <if test="memorySize != null" >
+        memory_size,
+      </if>
+      <if test="gpuType != null" >
+        gpu_type,
+      </if>
+      <if test="gpuVersion != null" >
+        gpu_version,
+      </if>
+      <if test="antutuCpuSinglecoreScore != null" >
+        antutu_cpu_singlecore_score,
+      </if>
+      <if test="antutuCpuSinglecoreNormalcalScore != null" >
+        antutu_cpu_singlecore_normalcal_score,
+      </if>
+      <if test="antutuCpuMulticoreScore != null" >
+        antutu_cpu_multicore_score,
+      </if>
+      <if test="antutuRamScore != null" >
+        antutu_ram_score,
+      </if>
+      <if test="antutuRomScore != null" >
+        antutu_rom_score,
+      </if>
+      <if test="antutuDataProcessScore != null" >
+        antutu_data_process_score,
+      </if>
+      <if test="antutuImgProcessScore != null" >
+        antutu_img_process_score,
+      </if>
+      <if test="antutuDataSecurityScore != null" >
+        antutu_data_security_score,
+      </if>
+      <if test="antutuH5Score != null" >
+        antutu_h5_score,
+      </if>
+      <if test="sdbenchRamCopySpeed != null" >
+        sdbench_ram_copy_speed,
+      </if>
+      <if test="sdbenchSdcardReadSpeed != null" >
+        sdbench_sdcard_read_speed,
+      </if>
+      <if test="sdbenchSdcardWriteSpeed != null" >
+        sdbench_sdcard_write_speed,
+      </if>
+      <if test="sdbenchRomReadSpeed != null" >
+        sdbench_rom_read_speed,
+      </if>
+      <if test="sdbenchRomWriteSpeed != null" >
+        sdbench_rom_write_speed,
+      </if>
+      <if test="androbenchSeqReadSpeed != null" >
+        androbench_seq_read_speed,
+      </if>
+      <if test="androbenchSeqWriteSpeed != null" >
+        androbench_seq_write_speed,
+      </if>
+      <if test="androbenchRandomReadSpeed != null" >
+        androbench_random_read_speed,
+      </if>
+      <if test="androbenchRandomWriteSpeed != null" >
+        androbench_random_write_speed,
+      </if>
+      <if test="androbenchSqlInsert != null" >
+        androbench_sql_insert,
+      </if>
+      <if test="androbenchSqlUpdate != null" >
+        androbench_sql_update,
+      </if>
+      <if test="androbenchSqlDelete != null" >
+        androbench_sql_delete,
+      </if>
+      <if test="netPing != null" >
+        net_ping,
+      </if>
+      <if test="netSpeed != null" >
+        net_speed,
+      </if>
+      <if test="gpsNumber != null" >
+        gps_number,
+      </if>
+      <if test="gpsIntensity != null" >
+        gps_intensity,
+      </if>
+      <if test="bluetoothBasicFunction != null" >
+        bluetooth_basic_function,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="carName != null" >
+        #{carName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceName != null" >
+        #{deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="antutuTotalScoreOpengl2 != null" >
+        #{antutuTotalScoreOpengl2,jdbcType=INTEGER},
+      </if>
+      <if test="antutuTotalScoreOpengl3 != null" >
+        #{antutuTotalScoreOpengl3,jdbcType=INTEGER},
+      </if>
+      <if test="androidVersion != null" >
+        #{androidVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuMicroRchitecture != null" >
+        #{cpuMicroRchitecture,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuType != null" >
+        #{cpuType,jdbcType=VARCHAR},
+      </if>
+      <if test="dmipsActual != null" >
+        #{dmipsActual,jdbcType=INTEGER},
+      </if>
+      <if test="dmipsPridict != null" >
+        #{dmipsPridict,jdbcType=INTEGER},
+      </if>
+      <if test="cpuFrequency != null" >
+        #{cpuFrequency,jdbcType=INTEGER},
+      </if>
+      <if test="ddrFrequency != null" >
+        #{ddrFrequency,jdbcType=INTEGER},
+      </if>
+      <if test="memorySize != null" >
+        #{memorySize,jdbcType=INTEGER},
+      </if>
+      <if test="gpuType != null" >
+        #{gpuType,jdbcType=VARCHAR},
+      </if>
+      <if test="gpuVersion != null" >
+        #{gpuVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="antutuCpuSinglecoreScore != null" >
+        #{antutuCpuSinglecoreScore,jdbcType=INTEGER},
+      </if>
+      <if test="antutuCpuSinglecoreNormalcalScore != null" >
+        #{antutuCpuSinglecoreNormalcalScore,jdbcType=INTEGER},
+      </if>
+      <if test="antutuCpuMulticoreScore != null" >
+        #{antutuCpuMulticoreScore,jdbcType=INTEGER},
+      </if>
+      <if test="antutuRamScore != null" >
+        #{antutuRamScore,jdbcType=INTEGER},
+      </if>
+      <if test="antutuRomScore != null" >
+        #{antutuRomScore,jdbcType=INTEGER},
+      </if>
+      <if test="antutuDataProcessScore != null" >
+        #{antutuDataProcessScore,jdbcType=INTEGER},
+      </if>
+      <if test="antutuImgProcessScore != null" >
+        #{antutuImgProcessScore,jdbcType=INTEGER},
+      </if>
+      <if test="antutuDataSecurityScore != null" >
+        #{antutuDataSecurityScore,jdbcType=INTEGER},
+      </if>
+      <if test="antutuH5Score != null" >
+        #{antutuH5Score,jdbcType=INTEGER},
+      </if>
+      <if test="sdbenchRamCopySpeed != null" >
+        #{sdbenchRamCopySpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="sdbenchSdcardReadSpeed != null" >
+        #{sdbenchSdcardReadSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="sdbenchSdcardWriteSpeed != null" >
+        #{sdbenchSdcardWriteSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="sdbenchRomReadSpeed != null" >
+        #{sdbenchRomReadSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="sdbenchRomWriteSpeed != null" >
+        #{sdbenchRomWriteSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="androbenchSeqReadSpeed != null" >
+        #{androbenchSeqReadSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="androbenchSeqWriteSpeed != null" >
+        #{androbenchSeqWriteSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="androbenchRandomReadSpeed != null" >
+        #{androbenchRandomReadSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="androbenchRandomWriteSpeed != null" >
+        #{androbenchRandomWriteSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="androbenchSqlInsert != null" >
+        #{androbenchSqlInsert,jdbcType=DOUBLE},
+      </if>
+      <if test="androbenchSqlUpdate != null" >
+        #{androbenchSqlUpdate,jdbcType=DOUBLE},
+      </if>
+      <if test="androbenchSqlDelete != null" >
+        #{androbenchSqlDelete,jdbcType=DOUBLE},
+      </if>
+      <if test="netPing != null" >
+        #{netPing,jdbcType=DOUBLE},
+      </if>
+      <if test="netSpeed != null" >
+        #{netSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="gpsNumber != null" >
+        #{gpsNumber,jdbcType=INTEGER},
+      </if>
+      <if test="gpsIntensity != null" >
+        #{gpsIntensity,jdbcType=INTEGER},
+      </if>
+      <if test="bluetoothBasicFunction != null" >
+        #{bluetoothBasicFunction,jdbcType=BINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tencent.benchmark.model.BenchmarkExample" resultType="java.lang.Integer" >
+    select count(*) from t_device_benchmark
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_device_benchmark
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.carName != null" >
+        car_name = #{record.carName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceName != null" >
+        device_name = #{record.deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.antutuTotalScoreOpengl2 != null" >
+        antutu_total_score_openGL2 = #{record.antutuTotalScoreOpengl2,jdbcType=INTEGER},
+      </if>
+      <if test="record.antutuTotalScoreOpengl3 != null" >
+        antutu_total_score_openGL3 = #{record.antutuTotalScoreOpengl3,jdbcType=INTEGER},
+      </if>
+      <if test="record.androidVersion != null" >
+        android_version = #{record.androidVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cpuMicroRchitecture != null" >
+        cpu_micro_rchitecture = #{record.cpuMicroRchitecture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cpuType != null" >
+        cpu_type = #{record.cpuType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dmipsActual != null" >
+        dmips_actual = #{record.dmipsActual,jdbcType=INTEGER},
+      </if>
+      <if test="record.dmipsPridict != null" >
+        dmips_pridict = #{record.dmipsPridict,jdbcType=INTEGER},
+      </if>
+      <if test="record.cpuFrequency != null" >
+        cpu_frequency = #{record.cpuFrequency,jdbcType=INTEGER},
+      </if>
+      <if test="record.ddrFrequency != null" >
+        ddr_frequency = #{record.ddrFrequency,jdbcType=INTEGER},
+      </if>
+      <if test="record.memorySize != null" >
+        memory_size = #{record.memorySize,jdbcType=INTEGER},
+      </if>
+      <if test="record.gpuType != null" >
+        gpu_type = #{record.gpuType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gpuVersion != null" >
+        gpu_version = #{record.gpuVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.antutuCpuSinglecoreScore != null" >
+        antutu_cpu_singlecore_score = #{record.antutuCpuSinglecoreScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.antutuCpuSinglecoreNormalcalScore != null" >
+        antutu_cpu_singlecore_normalcal_score = #{record.antutuCpuSinglecoreNormalcalScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.antutuCpuMulticoreScore != null" >
+        antutu_cpu_multicore_score = #{record.antutuCpuMulticoreScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.antutuRamScore != null" >
+        antutu_ram_score = #{record.antutuRamScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.antutuRomScore != null" >
+        antutu_rom_score = #{record.antutuRomScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.antutuDataProcessScore != null" >
+        antutu_data_process_score = #{record.antutuDataProcessScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.antutuImgProcessScore != null" >
+        antutu_img_process_score = #{record.antutuImgProcessScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.antutuDataSecurityScore != null" >
+        antutu_data_security_score = #{record.antutuDataSecurityScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.antutuH5Score != null" >
+        antutu_h5_score = #{record.antutuH5Score,jdbcType=INTEGER},
+      </if>
+      <if test="record.sdbenchRamCopySpeed != null" >
+        sdbench_ram_copy_speed = #{record.sdbenchRamCopySpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sdbenchSdcardReadSpeed != null" >
+        sdbench_sdcard_read_speed = #{record.sdbenchSdcardReadSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sdbenchSdcardWriteSpeed != null" >
+        sdbench_sdcard_write_speed = #{record.sdbenchSdcardWriteSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sdbenchRomReadSpeed != null" >
+        sdbench_rom_read_speed = #{record.sdbenchRomReadSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sdbenchRomWriteSpeed != null" >
+        sdbench_rom_write_speed = #{record.sdbenchRomWriteSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="record.androbenchSeqReadSpeed != null" >
+        androbench_seq_read_speed = #{record.androbenchSeqReadSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="record.androbenchSeqWriteSpeed != null" >
+        androbench_seq_write_speed = #{record.androbenchSeqWriteSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="record.androbenchRandomReadSpeed != null" >
+        androbench_random_read_speed = #{record.androbenchRandomReadSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="record.androbenchRandomWriteSpeed != null" >
+        androbench_random_write_speed = #{record.androbenchRandomWriteSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="record.androbenchSqlInsert != null" >
+        androbench_sql_insert = #{record.androbenchSqlInsert,jdbcType=DOUBLE},
+      </if>
+      <if test="record.androbenchSqlUpdate != null" >
+        androbench_sql_update = #{record.androbenchSqlUpdate,jdbcType=DOUBLE},
+      </if>
+      <if test="record.androbenchSqlDelete != null" >
+        androbench_sql_delete = #{record.androbenchSqlDelete,jdbcType=DOUBLE},
+      </if>
+      <if test="record.netPing != null" >
+        net_ping = #{record.netPing,jdbcType=DOUBLE},
+      </if>
+      <if test="record.netSpeed != null" >
+        net_speed = #{record.netSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="record.gpsNumber != null" >
+        gps_number = #{record.gpsNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.gpsIntensity != null" >
+        gps_intensity = #{record.gpsIntensity,jdbcType=INTEGER},
+      </if>
+      <if test="record.bluetoothBasicFunction != null" >
+        bluetooth_basic_function = #{record.bluetoothBasicFunction,jdbcType=BINARY},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_device_benchmark
+    set id = #{record.id,jdbcType=INTEGER},
+      car_name = #{record.carName,jdbcType=VARCHAR},
+      device_name = #{record.deviceName,jdbcType=VARCHAR},
+      antutu_total_score_openGL2 = #{record.antutuTotalScoreOpengl2,jdbcType=INTEGER},
+      antutu_total_score_openGL3 = #{record.antutuTotalScoreOpengl3,jdbcType=INTEGER},
+      android_version = #{record.androidVersion,jdbcType=VARCHAR},
+      cpu_micro_rchitecture = #{record.cpuMicroRchitecture,jdbcType=VARCHAR},
+      cpu_type = #{record.cpuType,jdbcType=VARCHAR},
+      dmips_actual = #{record.dmipsActual,jdbcType=INTEGER},
+      dmips_pridict = #{record.dmipsPridict,jdbcType=INTEGER},
+      cpu_frequency = #{record.cpuFrequency,jdbcType=INTEGER},
+      ddr_frequency = #{record.ddrFrequency,jdbcType=INTEGER},
+      memory_size = #{record.memorySize,jdbcType=INTEGER},
+      gpu_type = #{record.gpuType,jdbcType=VARCHAR},
+      gpu_version = #{record.gpuVersion,jdbcType=VARCHAR},
+      antutu_cpu_singlecore_score = #{record.antutuCpuSinglecoreScore,jdbcType=INTEGER},
+      antutu_cpu_singlecore_normalcal_score = #{record.antutuCpuSinglecoreNormalcalScore,jdbcType=INTEGER},
+      antutu_cpu_multicore_score = #{record.antutuCpuMulticoreScore,jdbcType=INTEGER},
+      antutu_ram_score = #{record.antutuRamScore,jdbcType=INTEGER},
+      antutu_rom_score = #{record.antutuRomScore,jdbcType=INTEGER},
+      antutu_data_process_score = #{record.antutuDataProcessScore,jdbcType=INTEGER},
+      antutu_img_process_score = #{record.antutuImgProcessScore,jdbcType=INTEGER},
+      antutu_data_security_score = #{record.antutuDataSecurityScore,jdbcType=INTEGER},
+      antutu_h5_score = #{record.antutuH5Score,jdbcType=INTEGER},
+      sdbench_ram_copy_speed = #{record.sdbenchRamCopySpeed,jdbcType=DOUBLE},
+      sdbench_sdcard_read_speed = #{record.sdbenchSdcardReadSpeed,jdbcType=DOUBLE},
+      sdbench_sdcard_write_speed = #{record.sdbenchSdcardWriteSpeed,jdbcType=DOUBLE},
+      sdbench_rom_read_speed = #{record.sdbenchRomReadSpeed,jdbcType=DOUBLE},
+      sdbench_rom_write_speed = #{record.sdbenchRomWriteSpeed,jdbcType=DOUBLE},
+      androbench_seq_read_speed = #{record.androbenchSeqReadSpeed,jdbcType=DOUBLE},
+      androbench_seq_write_speed = #{record.androbenchSeqWriteSpeed,jdbcType=DOUBLE},
+      androbench_random_read_speed = #{record.androbenchRandomReadSpeed,jdbcType=DOUBLE},
+      androbench_random_write_speed = #{record.androbenchRandomWriteSpeed,jdbcType=DOUBLE},
+      androbench_sql_insert = #{record.androbenchSqlInsert,jdbcType=DOUBLE},
+      androbench_sql_update = #{record.androbenchSqlUpdate,jdbcType=DOUBLE},
+      androbench_sql_delete = #{record.androbenchSqlDelete,jdbcType=DOUBLE},
+      net_ping = #{record.netPing,jdbcType=DOUBLE},
+      net_speed = #{record.netSpeed,jdbcType=DOUBLE},
+      gps_number = #{record.gpsNumber,jdbcType=INTEGER},
+      gps_intensity = #{record.gpsIntensity,jdbcType=INTEGER},
+      bluetooth_basic_function = #{record.bluetoothBasicFunction,jdbcType=BINARY}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_device_benchmark
+    set id = #{record.id,jdbcType=INTEGER},
+      car_name = #{record.carName,jdbcType=VARCHAR},
+      device_name = #{record.deviceName,jdbcType=VARCHAR},
+      antutu_total_score_openGL2 = #{record.antutuTotalScoreOpengl2,jdbcType=INTEGER},
+      antutu_total_score_openGL3 = #{record.antutuTotalScoreOpengl3,jdbcType=INTEGER},
+      android_version = #{record.androidVersion,jdbcType=VARCHAR},
+      cpu_micro_rchitecture = #{record.cpuMicroRchitecture,jdbcType=VARCHAR},
+      cpu_type = #{record.cpuType,jdbcType=VARCHAR},
+      dmips_actual = #{record.dmipsActual,jdbcType=INTEGER},
+      dmips_pridict = #{record.dmipsPridict,jdbcType=INTEGER},
+      cpu_frequency = #{record.cpuFrequency,jdbcType=INTEGER},
+      ddr_frequency = #{record.ddrFrequency,jdbcType=INTEGER},
+      memory_size = #{record.memorySize,jdbcType=INTEGER},
+      gpu_type = #{record.gpuType,jdbcType=VARCHAR},
+      gpu_version = #{record.gpuVersion,jdbcType=VARCHAR},
+      antutu_cpu_singlecore_score = #{record.antutuCpuSinglecoreScore,jdbcType=INTEGER},
+      antutu_cpu_singlecore_normalcal_score = #{record.antutuCpuSinglecoreNormalcalScore,jdbcType=INTEGER},
+      antutu_cpu_multicore_score = #{record.antutuCpuMulticoreScore,jdbcType=INTEGER},
+      antutu_ram_score = #{record.antutuRamScore,jdbcType=INTEGER},
+      antutu_rom_score = #{record.antutuRomScore,jdbcType=INTEGER},
+      antutu_data_process_score = #{record.antutuDataProcessScore,jdbcType=INTEGER},
+      antutu_img_process_score = #{record.antutuImgProcessScore,jdbcType=INTEGER},
+      antutu_data_security_score = #{record.antutuDataSecurityScore,jdbcType=INTEGER},
+      antutu_h5_score = #{record.antutuH5Score,jdbcType=INTEGER},
+      sdbench_ram_copy_speed = #{record.sdbenchRamCopySpeed,jdbcType=DOUBLE},
+      sdbench_sdcard_read_speed = #{record.sdbenchSdcardReadSpeed,jdbcType=DOUBLE},
+      sdbench_sdcard_write_speed = #{record.sdbenchSdcardWriteSpeed,jdbcType=DOUBLE},
+      sdbench_rom_read_speed = #{record.sdbenchRomReadSpeed,jdbcType=DOUBLE},
+      sdbench_rom_write_speed = #{record.sdbenchRomWriteSpeed,jdbcType=DOUBLE},
+      androbench_seq_read_speed = #{record.androbenchSeqReadSpeed,jdbcType=DOUBLE},
+      androbench_seq_write_speed = #{record.androbenchSeqWriteSpeed,jdbcType=DOUBLE},
+      androbench_random_read_speed = #{record.androbenchRandomReadSpeed,jdbcType=DOUBLE},
+      androbench_random_write_speed = #{record.androbenchRandomWriteSpeed,jdbcType=DOUBLE},
+      androbench_sql_insert = #{record.androbenchSqlInsert,jdbcType=DOUBLE},
+      androbench_sql_update = #{record.androbenchSqlUpdate,jdbcType=DOUBLE},
+      androbench_sql_delete = #{record.androbenchSqlDelete,jdbcType=DOUBLE},
+      net_ping = #{record.netPing,jdbcType=DOUBLE},
+      net_speed = #{record.netSpeed,jdbcType=DOUBLE},
+      gps_number = #{record.gpsNumber,jdbcType=INTEGER},
+      gps_intensity = #{record.gpsIntensity,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tencent.benchmark.model.Benchmark" >
+    update t_device_benchmark
+    <set >
+      <if test="carName != null" >
+        car_name = #{carName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceName != null" >
+        device_name = #{deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="antutuTotalScoreOpengl2 != null" >
+        antutu_total_score_openGL2 = #{antutuTotalScoreOpengl2,jdbcType=INTEGER},
+      </if>
+      <if test="antutuTotalScoreOpengl3 != null" >
+        antutu_total_score_openGL3 = #{antutuTotalScoreOpengl3,jdbcType=INTEGER},
+      </if>
+      <if test="androidVersion != null" >
+        android_version = #{androidVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuMicroRchitecture != null" >
+        cpu_micro_rchitecture = #{cpuMicroRchitecture,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuType != null" >
+        cpu_type = #{cpuType,jdbcType=VARCHAR},
+      </if>
+      <if test="dmipsActual != null" >
+        dmips_actual = #{dmipsActual,jdbcType=INTEGER},
+      </if>
+      <if test="dmipsPridict != null" >
+        dmips_pridict = #{dmipsPridict,jdbcType=INTEGER},
+      </if>
+      <if test="cpuFrequency != null" >
+        cpu_frequency = #{cpuFrequency,jdbcType=INTEGER},
+      </if>
+      <if test="ddrFrequency != null" >
+        ddr_frequency = #{ddrFrequency,jdbcType=INTEGER},
+      </if>
+      <if test="memorySize != null" >
+        memory_size = #{memorySize,jdbcType=INTEGER},
+      </if>
+      <if test="gpuType != null" >
+        gpu_type = #{gpuType,jdbcType=VARCHAR},
+      </if>
+      <if test="gpuVersion != null" >
+        gpu_version = #{gpuVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="antutuCpuSinglecoreScore != null" >
+        antutu_cpu_singlecore_score = #{antutuCpuSinglecoreScore,jdbcType=INTEGER},
+      </if>
+      <if test="antutuCpuSinglecoreNormalcalScore != null" >
+        antutu_cpu_singlecore_normalcal_score = #{antutuCpuSinglecoreNormalcalScore,jdbcType=INTEGER},
+      </if>
+      <if test="antutuCpuMulticoreScore != null" >
+        antutu_cpu_multicore_score = #{antutuCpuMulticoreScore,jdbcType=INTEGER},
+      </if>
+      <if test="antutuRamScore != null" >
+        antutu_ram_score = #{antutuRamScore,jdbcType=INTEGER},
+      </if>
+      <if test="antutuRomScore != null" >
+        antutu_rom_score = #{antutuRomScore,jdbcType=INTEGER},
+      </if>
+      <if test="antutuDataProcessScore != null" >
+        antutu_data_process_score = #{antutuDataProcessScore,jdbcType=INTEGER},
+      </if>
+      <if test="antutuImgProcessScore != null" >
+        antutu_img_process_score = #{antutuImgProcessScore,jdbcType=INTEGER},
+      </if>
+      <if test="antutuDataSecurityScore != null" >
+        antutu_data_security_score = #{antutuDataSecurityScore,jdbcType=INTEGER},
+      </if>
+      <if test="antutuH5Score != null" >
+        antutu_h5_score = #{antutuH5Score,jdbcType=INTEGER},
+      </if>
+      <if test="sdbenchRamCopySpeed != null" >
+        sdbench_ram_copy_speed = #{sdbenchRamCopySpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="sdbenchSdcardReadSpeed != null" >
+        sdbench_sdcard_read_speed = #{sdbenchSdcardReadSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="sdbenchSdcardWriteSpeed != null" >
+        sdbench_sdcard_write_speed = #{sdbenchSdcardWriteSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="sdbenchRomReadSpeed != null" >
+        sdbench_rom_read_speed = #{sdbenchRomReadSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="sdbenchRomWriteSpeed != null" >
+        sdbench_rom_write_speed = #{sdbenchRomWriteSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="androbenchSeqReadSpeed != null" >
+        androbench_seq_read_speed = #{androbenchSeqReadSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="androbenchSeqWriteSpeed != null" >
+        androbench_seq_write_speed = #{androbenchSeqWriteSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="androbenchRandomReadSpeed != null" >
+        androbench_random_read_speed = #{androbenchRandomReadSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="androbenchRandomWriteSpeed != null" >
+        androbench_random_write_speed = #{androbenchRandomWriteSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="androbenchSqlInsert != null" >
+        androbench_sql_insert = #{androbenchSqlInsert,jdbcType=DOUBLE},
+      </if>
+      <if test="androbenchSqlUpdate != null" >
+        androbench_sql_update = #{androbenchSqlUpdate,jdbcType=DOUBLE},
+      </if>
+      <if test="androbenchSqlDelete != null" >
+        androbench_sql_delete = #{androbenchSqlDelete,jdbcType=DOUBLE},
+      </if>
+      <if test="netPing != null" >
+        net_ping = #{netPing,jdbcType=DOUBLE},
+      </if>
+      <if test="netSpeed != null" >
+        net_speed = #{netSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="gpsNumber != null" >
+        gps_number = #{gpsNumber,jdbcType=INTEGER},
+      </if>
+      <if test="gpsIntensity != null" >
+        gps_intensity = #{gpsIntensity,jdbcType=INTEGER},
+      </if>
+      <if test="bluetoothBasicFunction != null" >
+        bluetooth_basic_function = #{bluetoothBasicFunction,jdbcType=BINARY},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tencent.benchmark.model.Benchmark" >
+    update t_device_benchmark
+    set car_name = #{carName,jdbcType=VARCHAR},
+      device_name = #{deviceName,jdbcType=VARCHAR},
+      antutu_total_score_openGL2 = #{antutuTotalScoreOpengl2,jdbcType=INTEGER},
+      antutu_total_score_openGL3 = #{antutuTotalScoreOpengl3,jdbcType=INTEGER},
+      android_version = #{androidVersion,jdbcType=VARCHAR},
+      cpu_micro_rchitecture = #{cpuMicroRchitecture,jdbcType=VARCHAR},
+      cpu_type = #{cpuType,jdbcType=VARCHAR},
+      dmips_actual = #{dmipsActual,jdbcType=INTEGER},
+      dmips_pridict = #{dmipsPridict,jdbcType=INTEGER},
+      cpu_frequency = #{cpuFrequency,jdbcType=INTEGER},
+      ddr_frequency = #{ddrFrequency,jdbcType=INTEGER},
+      memory_size = #{memorySize,jdbcType=INTEGER},
+      gpu_type = #{gpuType,jdbcType=VARCHAR},
+      gpu_version = #{gpuVersion,jdbcType=VARCHAR},
+      antutu_cpu_singlecore_score = #{antutuCpuSinglecoreScore,jdbcType=INTEGER},
+      antutu_cpu_singlecore_normalcal_score = #{antutuCpuSinglecoreNormalcalScore,jdbcType=INTEGER},
+      antutu_cpu_multicore_score = #{antutuCpuMulticoreScore,jdbcType=INTEGER},
+      antutu_ram_score = #{antutuRamScore,jdbcType=INTEGER},
+      antutu_rom_score = #{antutuRomScore,jdbcType=INTEGER},
+      antutu_data_process_score = #{antutuDataProcessScore,jdbcType=INTEGER},
+      antutu_img_process_score = #{antutuImgProcessScore,jdbcType=INTEGER},
+      antutu_data_security_score = #{antutuDataSecurityScore,jdbcType=INTEGER},
+      antutu_h5_score = #{antutuH5Score,jdbcType=INTEGER},
+      sdbench_ram_copy_speed = #{sdbenchRamCopySpeed,jdbcType=DOUBLE},
+      sdbench_sdcard_read_speed = #{sdbenchSdcardReadSpeed,jdbcType=DOUBLE},
+      sdbench_sdcard_write_speed = #{sdbenchSdcardWriteSpeed,jdbcType=DOUBLE},
+      sdbench_rom_read_speed = #{sdbenchRomReadSpeed,jdbcType=DOUBLE},
+      sdbench_rom_write_speed = #{sdbenchRomWriteSpeed,jdbcType=DOUBLE},
+      androbench_seq_read_speed = #{androbenchSeqReadSpeed,jdbcType=DOUBLE},
+      androbench_seq_write_speed = #{androbenchSeqWriteSpeed,jdbcType=DOUBLE},
+      androbench_random_read_speed = #{androbenchRandomReadSpeed,jdbcType=DOUBLE},
+      androbench_random_write_speed = #{androbenchRandomWriteSpeed,jdbcType=DOUBLE},
+      androbench_sql_insert = #{androbenchSqlInsert,jdbcType=DOUBLE},
+      androbench_sql_update = #{androbenchSqlUpdate,jdbcType=DOUBLE},
+      androbench_sql_delete = #{androbenchSqlDelete,jdbcType=DOUBLE},
+      net_ping = #{netPing,jdbcType=DOUBLE},
+      net_speed = #{netSpeed,jdbcType=DOUBLE},
+      gps_number = #{gpsNumber,jdbcType=INTEGER},
+      gps_intensity = #{gpsIntensity,jdbcType=INTEGER},
+      bluetooth_basic_function = #{bluetoothBasicFunction,jdbcType=BINARY}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tencent.benchmark.model.Benchmark" >
+    update t_device_benchmark
+    set car_name = #{carName,jdbcType=VARCHAR},
+      device_name = #{deviceName,jdbcType=VARCHAR},
+      antutu_total_score_openGL2 = #{antutuTotalScoreOpengl2,jdbcType=INTEGER},
+      antutu_total_score_openGL3 = #{antutuTotalScoreOpengl3,jdbcType=INTEGER},
+      android_version = #{androidVersion,jdbcType=VARCHAR},
+      cpu_micro_rchitecture = #{cpuMicroRchitecture,jdbcType=VARCHAR},
+      cpu_type = #{cpuType,jdbcType=VARCHAR},
+      dmips_actual = #{dmipsActual,jdbcType=INTEGER},
+      dmips_pridict = #{dmipsPridict,jdbcType=INTEGER},
+      cpu_frequency = #{cpuFrequency,jdbcType=INTEGER},
+      ddr_frequency = #{ddrFrequency,jdbcType=INTEGER},
+      memory_size = #{memorySize,jdbcType=INTEGER},
+      gpu_type = #{gpuType,jdbcType=VARCHAR},
+      gpu_version = #{gpuVersion,jdbcType=VARCHAR},
+      antutu_cpu_singlecore_score = #{antutuCpuSinglecoreScore,jdbcType=INTEGER},
+      antutu_cpu_singlecore_normalcal_score = #{antutuCpuSinglecoreNormalcalScore,jdbcType=INTEGER},
+      antutu_cpu_multicore_score = #{antutuCpuMulticoreScore,jdbcType=INTEGER},
+      antutu_ram_score = #{antutuRamScore,jdbcType=INTEGER},
+      antutu_rom_score = #{antutuRomScore,jdbcType=INTEGER},
+      antutu_data_process_score = #{antutuDataProcessScore,jdbcType=INTEGER},
+      antutu_img_process_score = #{antutuImgProcessScore,jdbcType=INTEGER},
+      antutu_data_security_score = #{antutuDataSecurityScore,jdbcType=INTEGER},
+      antutu_h5_score = #{antutuH5Score,jdbcType=INTEGER},
+      sdbench_ram_copy_speed = #{sdbenchRamCopySpeed,jdbcType=DOUBLE},
+      sdbench_sdcard_read_speed = #{sdbenchSdcardReadSpeed,jdbcType=DOUBLE},
+      sdbench_sdcard_write_speed = #{sdbenchSdcardWriteSpeed,jdbcType=DOUBLE},
+      sdbench_rom_read_speed = #{sdbenchRomReadSpeed,jdbcType=DOUBLE},
+      sdbench_rom_write_speed = #{sdbenchRomWriteSpeed,jdbcType=DOUBLE},
+      androbench_seq_read_speed = #{androbenchSeqReadSpeed,jdbcType=DOUBLE},
+      androbench_seq_write_speed = #{androbenchSeqWriteSpeed,jdbcType=DOUBLE},
+      androbench_random_read_speed = #{androbenchRandomReadSpeed,jdbcType=DOUBLE},
+      androbench_random_write_speed = #{androbenchRandomWriteSpeed,jdbcType=DOUBLE},
+      androbench_sql_insert = #{androbenchSqlInsert,jdbcType=DOUBLE},
+      androbench_sql_update = #{androbenchSqlUpdate,jdbcType=DOUBLE},
+      androbench_sql_delete = #{androbenchSqlDelete,jdbcType=DOUBLE},
+      net_ping = #{netPing,jdbcType=DOUBLE},
+      net_speed = #{netSpeed,jdbcType=DOUBLE},
+      gps_number = #{gpsNumber,jdbcType=INTEGER},
+      gps_intensity = #{gpsIntensity,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
