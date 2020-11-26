@@ -36,4 +36,6 @@ public interface BenchmarkMapper {
     int updateByPrimaryKeyWithBLOBs(Benchmark record);
 
     int updateByPrimaryKey(Benchmark record);
+
+    List<Benchmark> selectAll();
 }
